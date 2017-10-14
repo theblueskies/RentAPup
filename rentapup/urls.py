@@ -21,6 +21,7 @@ from pups import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('pups.urls')),
+    url(r'^$', views.index, name='index'),
     url(r'^login/$', auth_views.login, {'template_name': 'pups/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'pups/logged_out.html'}, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
