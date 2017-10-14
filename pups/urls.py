@@ -7,4 +7,5 @@ urlpatterns = [
     # ex: /polls/
     url(r'^$', views.index, name='index'),
     url(r'^charge/$', payment_views.charge, name="charge"),
+    url(r'^user-profile$', views.user_profile, name='index'),
 ]

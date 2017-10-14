@@ -8,11 +8,12 @@ from django.template import loader
 from django.contrib.auth.forms import UserCreationForm
 
 from pups.models import Puppy
+from pups.forms import ProfileForm, PuppyForm
 
 
 def index(request):
-    puppies = Puppy.objects.all()
-    template = loader.get_template('pups/index.html')
+    puppies = Puppy.objects.all() # Gets all puppy instances from DB
+    template = loader.get_template('pups/home.html') # Selects template to use
     context = {
         'puppies': puppies
     }
@@ -34,10 +35,19 @@ def signup(request):
     return render(request, 'pups/signup.html', {'form': form})
 
 
-class ProfileView(View):
-    def get(self, request, *args, **kwargs):
-        pass
+def user_profile(request):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProfileForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
 
-    def post(self, request, *args, **kwargs):
-        print (request.data)
-        return HttpResponse(json.dumps(request.data))
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ProfileForm()
+
+    return render(request, 'pups/profile_create.html', {'form': form})
