@@ -11,9 +11,17 @@
 
 
 {% block content %}
-<form action="/your-name/" method="post">
-    <label for="firstname">Your name: </label>
-    <input id="firstname" type="text" name="firstname" value="{{ firstname }}">
+<form action="/dog-trade/" method="post">
+    {% for field in form %}
+      <div class="fieldWrapper">
+          {{ field.errors }}
+          {{ field.label_tag }} {{ field }}
+          {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+      </div>
+    {% endfor %}
+
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
