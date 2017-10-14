@@ -100,8 +100,8 @@ class SalePaymentForm(forms.Form):
 
             sale = Sale()
 
-            # let's charge $10.00 for this particular item
-            success, instance = sale.charge(1000, number, exp_month,
+            # let's charge $.01 for this particular item
+            success, instance = sale.charge(1, number, exp_month,
                                             exp_year, cvc)
 
             if not success:

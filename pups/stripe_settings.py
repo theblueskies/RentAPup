@@ -1,1 +1,1 @@
-STRIPE_API_KEY = ""
+STRIPE_API_KEY = "rk_test_PTLIao31aIgNmP41nAHtTrYS"
