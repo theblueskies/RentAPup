@@ -1,0 +1,8 @@
+*.pyc
+__pycache__
+.Python
+.cache
+.DS_Store
+pip-selfcheck.json
+/bin
+/include
