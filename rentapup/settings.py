@@ -76,9 +76,17 @@ WSGI_APPLICATION = 'rentapup.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd1ncp32l58kbe4',
+        'USER': 'fexzrpiheziffk',
+        'PASSWORD': 'c4ca70092ccff346197293b60cf32f9ee3e8d7cf99a8da3123c6678d10b67096',
+        'HOST': 'ec2-50-17-217-166.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
