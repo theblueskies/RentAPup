@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-import pups.stripe_settings
+from pups.stripe_settings import STRIPE_API_KEY
 
 class Puppy(models.Model):
     name = models.CharField(max_length=20)
@@ -22,7 +22,7 @@ class Sale(models.Model):
  
         # bring in stripe, and get the api key from settings.py
         import stripe
-        stripe.api_key = stripe_settings.STRIPE_API_KEY
+        stripe.api_key = STRIPE_API_KEY
  
         self.stripe = stripe
  
