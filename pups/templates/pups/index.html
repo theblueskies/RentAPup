@@ -1,0 +1,12 @@
+<div>
+  <h1> Rent a pup </h1>
+</div>
+{% if puppies %}
+    <ul>
+    {% for puppy in puppies %}
+        <li><a href="/app/{{ puppy.id }}/">{{ puppy.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No puppies are available.</p>
+{% endif %}
