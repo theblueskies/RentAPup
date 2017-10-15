@@ -137,6 +137,10 @@ def edit_profile(request):
                 if puppy:
                     puppy.delete()
             else:
+                puppy = Puppy.objects.filter(owner=request.user).first()
+                if not puppy:
+                    puppy = Puppy(owner=request.user)
+                    puppy.save()
                 puppy.name = form.cleaned_data['name_of_dog'],
                 puppy.breed = form.cleaned_data['breed_of_dog'],
                 puppy.age = form.cleaned_data['age_of_dog']
