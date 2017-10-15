@@ -96,6 +96,9 @@ def home(request):
 def get_or_rent_puppy(request):
     if request.method == 'GET':
         context = {}
-        profile = Profile.objects.filter(active_user=request.user)
-        template = loader.get_template('pups/home.html') # Selects template to use
+        profile = Profile.objects.filter(active_user=request.user).first()
+        if profile.renter == True:
+            template = loader.get_template('pups/renter.html')
+        else:
+            template = loader.get_template('pups/owner.html')
         return HttpResponse(template.render(context, request))
