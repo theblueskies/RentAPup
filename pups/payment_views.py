@@ -39,6 +39,10 @@ def checkout(request):
 
         except stripe.error.CardError as ce:
             return False, ce
+        else:
+            template = loader.get_template('pups/checkout.html')
+            return HttpResponse(template.render({}, request))
+
 
     else:
         # new_puppy.save()
