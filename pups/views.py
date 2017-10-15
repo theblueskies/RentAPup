@@ -132,7 +132,7 @@ def edit_profile(request):
             profile.address = form.cleaned_data['address']
             profile.save()
 
-            if form.cleaned_data['renter'] == False:
+            if form.cleaned_data['renter'] == True:
                 puppy = Puppy.objects.filter(owner=request.user).first()
                 if puppy:
                     puppy.delete()
