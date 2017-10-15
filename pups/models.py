@@ -14,7 +14,7 @@ class Puppy(models.Model):
 
 class UserProfile(models.Model):
     active_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    renter = models.BooleanField()
+    renter = models.BooleanField(default=False)
 
 
 class Sale(models.Model):
