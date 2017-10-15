@@ -1,1 +1,24 @@
-hello world
+{% extends 'pups/base_logged_in.html' %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<style>
+p {
+    font-size: 5vw;
+}
+</style>
+<div class="center">
+	<p class="thankyou">Thank you for your payment! </p>
+	<p class="thankyou"> Your puppy is on its way! </p>
+</div>
+{% endblock %}
