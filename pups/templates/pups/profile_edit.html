@@ -13,10 +13,12 @@
 {% bootstrap_messages %}
 
 {% block content %}
+<div class="center">
 <h1> Edit Profile</h1>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
   {% bootstrap_button "Submit Profile" button_class="btn btn-primary"%}
 </form>
+</div>
 {% endblock %}

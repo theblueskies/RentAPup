@@ -21,7 +21,7 @@ function myFunction() {
 <div class="heroSection">
         {% if are_puppies_available %}
         <div class="heroCopy">
-            <a href="#" class="CTA" onclick="myFunction()">I want a dog</a>
+            <a href="{% url 'payment_form' %}" class="CTA">I want a dog</a>
             <p id="demo" class="appear">
         </div>
         {% else %}
