@@ -27,18 +27,18 @@ def checkout(request):
     if request.method == "POST":
         token = request.POST.get("stripeToken")
 
-    try:
-        charge = stripe.Charge.create(
-            amount = 50,
-            currency = "usd",
-            source = token,
-            description = "The product charged to the user"
-        )
+        try:
+            charge = stripe.Charge.create(
+                amount = 50,
+                currency = "usd",
+                source = token,
+                description = "The product charged to the user"
+            )
 
-        # new_puppy.charge_id = charge.id
+            # new_puppy.charge_id = charge.id
 
-    except stripe.error.CardError as ce:
-        return False, ce
+        except stripe.error.CardError as ce:
+            return False, ce
 
     else:
         # new_puppy.save()
