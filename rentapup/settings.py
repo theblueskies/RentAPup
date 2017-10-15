@@ -144,3 +144,6 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/app/user-profile/'
+
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_URL = '/media/'

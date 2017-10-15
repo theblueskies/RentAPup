@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'template_name': 'pups/logged_out.html'}, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
