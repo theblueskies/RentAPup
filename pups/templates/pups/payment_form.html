@@ -1,0 +1,11 @@
+<form action="checkout" method="POST">
+	{% csrf_token %}
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key={{ stripe_key }} 
+        data-amount="50"
+        data-name="RentAPup"
+        data-description="puppies on demand"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-currency="usd">
+    </script>
+</form>
