@@ -14,9 +14,14 @@ from pups.forms import ProfileForm, PuppyForm
 def index(request):
     puppies = Puppy.objects.all() # Gets all puppy instances from DB
     template = loader.get_template('pups/home.html') # Selects template to use
-    context = {
-        'puppies': puppies
-    }
+    if request.user:
+        context = {
+            'puppies': 'user is authenticated'
+        }
+    else:
+        print ("Not authenticated")
+        return redirect('login')
+
     return HttpResponse(template.render(context, request))
 
 
