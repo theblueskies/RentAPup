@@ -1,7 +1,7 @@
 import json
 
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
 from django.urls import reverse
@@ -51,14 +51,14 @@ def user_profile(request):
         if form.is_valid():
             print (form.cleaned_data)
             user = request.user
-            user.firstname = form.cleaned_data['firstname']
-            user.lastname = form.cleaned_data['lastname']
-            user.address = form.cleaned_data['address']
+            user.first_name = form.cleaned_data['firstname']
+            user.last_name = form.cleaned_data['lastname']
             user.email = form.cleaned_data['email']
             user.save()
 
             profile = Profile(active_user=user,
-                              renter=form.cleaned_data['renter'])
+                              renter=form.cleaned_data['renter'],
+                              address=form.cleaned_data['address'])
             profile.save()
 
             puppy = Puppy(owner=request.user,
@@ -66,9 +66,6 @@ def user_profile(request):
                           breed=form.cleaned_data['breed_of_dog'],
                           age=form.cleaned_data['age_of_dog'])
             puppy.save()
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             return redirect('/app/puppy/')
 
     # if a GET (or any other method) we'll create a blank form
@@ -105,3 +102,42 @@ def get_or_rent_puppy(request):
         else:
             template = loader.get_template('pups/owner.html')
         return HttpResponse(template.render(context, request))
+
+
+def edit_profile(request):
+    profile = get_object_or_404(Profile, active_user=request.user)
+    puppy = get_object_or_404(Puppy, owner=request.user)
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProfileForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            print (form.cleaned_data)
+            user = request.user
+            user.first_name = form.cleaned_data['firstname']
+            user.last_name = form.cleaned_data['lastname']
+            user.email = form.cleaned_data['email']
+            user.save()
+
+            profile.renter = form.cleaned_data['renter']
+            profile.address = form.cleaned_data['address']
+            profile.save()
+
+            puppy.name = form.cleaned_data['name_of_dog'],
+            puppy.breed = form.cleaned_data['breed_of_dog'],
+            puppy.age = form.cleaned_data['age_of_dog']
+            puppy.save()
+            return redirect('/app/puppy/')
+    else:
+        data = {
+            'firstname': request.user.first_name,
+            'lastname': request.user.last_name,
+            'email': request.user.email,
+            'address': profile.address,
+            'renter': profile.renter,
+            'name_of_dog': puppy.name,
+            'breed_of_dog': puppy.breed,
+            'age_of_dog': puppy.age,
+        }
+        form = ProfileForm(data)
+        return render(request, 'pups/profile_edit.html', {'form': form})

@@ -15,6 +15,7 @@ class Puppy(models.Model):
 class UserProfile(models.Model):
     active_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     renter = models.BooleanField(default=False)
+    address = models.CharField(max_length=100, default=None)
 
 
 class Sale(models.Model):

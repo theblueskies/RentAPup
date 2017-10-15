@@ -15,7 +15,7 @@
 {% block content %}
 <div id="mainWrapper" class="jayZ">
       <div id="ownerToggle" class="center">
-          <h1>Rent out my dog</h1>
+          <h1>Rent out my dog {{user}} </h1>
 
           <input data-toggle="toggle" data-on="Yes" data-off="No" data-width="100" data-height="75" type="checkbox">
       </div>
@@ -23,7 +23,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
-  
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
   <script src="{% static 'js/bootstrap-toggle.js' %}"></script>
