@@ -1,0 +1,22 @@
+{% extends 'pups/base_logged_in.html' %}
+{% load staticfiles %}
+
+<html>
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<h1> Edit Profile</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% bootstrap_button "Submit Profile" button_class="btn btn-primary"%}
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'pups/base_logged_in.html' %}
+{% load staticfiles %}
+
+<html>
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Your puppy is on its way!";
+}
+</script>
+<div class="heroSection">
+        {% if are_puppies_available %}
+        <div class="heroCopy">
+            <a href="#" class="CTA" onclick="myFunction()">I want a dog</a>
+            <p id="demo" class="appear">
+        </div>
+        {% else %}
+        <div>
+        <p>Sorry no puppies are available right now. Please check back later"</p>
+        </div>
+        {% endif %}
+</div>
+{% endblock %}

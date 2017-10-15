@@ -1,0 +1,31 @@
+{% extends 'pups/base_logged_in.html' %}
+{% load staticfiles %}
+
+<html>
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<div id="mainWrapper" class="jayZ">
+      <div id="ownerToggle" class="center">
+          <h1>My dog is available </h1>
+
+          <input data-toggle="toggle" data-on="Yes" data-off="No" data-width="100" data-height="75" type="checkbox">
+      </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <script src="{% static 'js/bootstrap-toggle.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/bootstrap-toggle.css' %}"</>
+{% endblock %}

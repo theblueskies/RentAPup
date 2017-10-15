@@ -1,21 +1,49 @@
-{% extends 'pups/base.html' %}
-{# Load the tag library #}
-{% load bootstrap3 %}
+{% load staticfiles %}
+<html>
 
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+  {# Load the tag library #}
+  {% load bootstrap3 %}
 
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
+  {# Load CSS and JavaScript #}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 
-{% block title %}Login{% endblock %}
+  {# Display django.contrib.messages as Bootstrap alerts #}
+  {% bootstrap_messages %}
 
-{% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <title>Basic Page Template</title>
+
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+</head>
+
+<body>
+    <header class="clear">
+        <div class="innerContainer">
+            <h1 class="col"><a href="/">Rent A Pup</a></h1>
+        </div>
+    </header>
+
+
+    <div id="mainWrapper" class="jayZ center">
+        {% block content %}
+          <h2>Login</h2>
+          <div>
+            <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              {% bootstrap_button "Login" button_class="btn btn-primary"%}
+              </a>
+            </form>
+          </div>
+          <div>
+            <a href="{% url 'signup' %}">Don't have an account?</a>
+          </div>
+        {% endblock %}
+
+    </div>
+</body>
+
+</html>

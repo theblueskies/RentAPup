@@ -15,7 +15,10 @@ class ProfileForm(forms.Form):
     lastname = forms.CharField(label='Last Name', max_length=100)
     address = forms.CharField(label='Address', max_length=100)
     email = forms.EmailField()
-    renter = forms.BooleanField()
+    renter = forms.BooleanField(required=False)
+    name_of_dog = forms.CharField(label='Name of dog', max_length=100)
+    breed_of_dog = forms.CharField(label='Breed of dog', max_length=100)
+    age_of_dog = forms.IntegerField()
 
 
 class PuppyForm(forms.Form):

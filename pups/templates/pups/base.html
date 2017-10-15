@@ -1,29 +1,138 @@
 <!DOCTYPE html>
 <html>
-{# Load the tag library #}
-{% load bootstrap3 %}
 
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Rent A Pup Login{% endblock %}</title>
+
+  {# Load the tag library #}
+  {% load bootstrap3 %}
+
+  {# Load CSS and JavaScript #}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+
+  {# Display django.contrib.messages as Bootstrap alerts #}
+  {% bootstrap_messages %}
+
+  <style>
+  header{
+    width: 100%;
+    position: relative;
+    z-index: 99;
+    background: rgba(0,0,0,.6);
+  }
+  .innerContainer{
+    max-width: 1200px;
+    margin: auto;
+  }
+  header a{
+    color: #fff;
+  }
+
+  .col{
+    float: left;
+  }
+  .col.right{
+    float: right;
+  }
+
+  nav{
+
+  }
+  nav ul{
+    list-style: none;
+  }
+  nav ul li{
+    display: inline-block;
+    margin-left: 20px;
+  }
+  nav ul li a{
+    display: inline-block;
+    padding: 20px;
+  }
+
+  .clear:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.heroSection{
+
+}
+.heroCopy{
+  position: relative;
+  z-index: 9999;
+  text-align: center;
+  padding-top: 10%;
+  color: #fff;
+}
+.heroCopy h1{
+  font-size: 9vw;
+}
+.heroCopy p{
+  font-size: 2vw;
+}
+main{
+  position: relative;
+  z-index: 99;
+}
+.videoContainer{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80vh;
+  background-color: #000;
+}
+.videoContainer video{
+  width: 100%;
+  height: 170%;
+  margin-left: -0%;
+  margin-top: -20%;
+  z-index: -99;
+}
+
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Rent A Pup</h1>
+  <header class="clear">
+    <div class="innerContainer">
+      <h1 class="col"><a href="#">Rent A Pup</a></h1>
 
-<video src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv"></video>
+      <nav class="col right">
+        <ul>
+          <li>
+            <a href="{% url 'login' %}">
+            {% bootstrap_button "Login" button_class="btn btn-primary"%}
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'signup' %}">
+              {% bootstrap_button "Signup" button_class="btn btn-primary"%}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <hr>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
+<div class="heroSection">
+  <div class="heroCopy">
+    <h1>Rent a puppy today</h1>
+    <p>You know you want one!</p>
+  </div>
+  <div class="videoContainer">
+    <video autoplay src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv"></video>
+  </div>
+</div>
+
+<main>
+  {% block content %}
+  {% endblock %}
+</main>
+
   <hr>
 </body>
 </html>
