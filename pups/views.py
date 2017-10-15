@@ -16,7 +16,7 @@ from pups.forms import ProfileForm, PuppyForm
 
 def index(request):
     puppies = Puppy.objects.all() # Gets all puppy instances from DB
-    template = loader.get_template('pups/home.html') # Selects template to use
+    template = loader.get_template('pups/base.html') # Selects template to use
     if request.user:
         context = {
             'puppies': 'user is authenticated'
@@ -98,6 +98,9 @@ def get_or_rent_puppy(request):
         context = {}
         profile = Profile.objects.filter(active_user=request.user).first()
         if profile.renter == True:
+            available_puppies = Puppy.objects.filter(rented_now=False).first()
+            if available_puppies:
+                context['are_puppies_available'] = True
             template = loader.get_template('pups/renter.html')
         else:
             template = loader.get_template('pups/owner.html')

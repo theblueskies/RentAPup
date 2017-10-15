@@ -14,8 +14,13 @@
 
 {% block content %}
 <div class="heroSection">
+        {% if are_puppies_available %}
         <div class="heroCopy">
             <a href="#" class="CTA">I want a dog</a>
+        </div>
+        {% else %}
+        <div>
+        <p>Sorry no puppies are available right now. Please check back later"</p>
         </div>
 </div>
 {% endblock %}
