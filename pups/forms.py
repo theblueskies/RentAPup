@@ -105,7 +105,7 @@ class SalePaymentForm(forms.Form):
                                             exp_year, cvc)
 
             if not success:
-                raise forms.ValidationError("Error: %s" % instance.message)
+                raise forms.ValidationError("Error: %s" % instance)
             else:
                 instance.save()
                 # we were successful! do whatever you will here...

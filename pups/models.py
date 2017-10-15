@@ -65,6 +65,6 @@ class Sale(models.Model):
 
         except self.stripe.CardError as ce:
             # charge failed
-            return False, ce
+            return False, ce.json_body.get('error', {})
 
         return True, response
