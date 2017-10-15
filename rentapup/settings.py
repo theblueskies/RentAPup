@@ -143,4 +143,4 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-LOGIN_REDIRECT_URL = '/app'
+LOGIN_REDIRECT_URL = '/app/user-profile/'

@@ -1,4 +1,7 @@
-{% extends 'pups/base.html' %}
+{% extends 'pups/base_logged_in.html' %}
+{% load staticfiles %}
+
+<html>
 {# Load the tag library #}
 {% load bootstrap3 %}
 
@@ -8,3 +11,11 @@
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
+
+{% block content %}
+<div class="heroSection">
+        <div class="heroCopy">
+            <a href="#" class="CTA">I want a dog</a>
+        </div>
+</div>
+{% endblock %}

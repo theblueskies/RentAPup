@@ -1,5 +1,5 @@
-{% load staticfiles %}
 {% extends 'pups/base_logged_in.html' %}
+{% load staticfiles %}
 
 <html>
 {# Load the tag library #}
@@ -13,7 +13,10 @@
 {% bootstrap_messages %}
 
 {% block content %}
-  <h1> Create Profile</h1>
-  <input type="submit" value="Submit">
+<h1> Create Profile</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% bootstrap_button "Create Profile" button_class="btn btn-primary"%}
 </form>
 {% endblock %}
