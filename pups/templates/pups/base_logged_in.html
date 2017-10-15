@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Basic Page Template</title>
+
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+</head>
+
+<body>
+    <header class="clear">
+        <div class="innerContainer">
+            <h1 class="col"><a href="#">Rent A Pup</a></h1>
+
+            <nav class="col right">
+                <ul>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+</body>
+
+</html>

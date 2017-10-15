@@ -8,23 +8,3 @@
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
-
-{% block title %}Login{% endblock %}
-
-{% block content %}
-  <div>
-  {% if user.is_authenticated %}
-    Hi {{ user.username }}!
-    <a href="{% url 'logout' %}">Logout</a>
-  {% else %}
-    <div>
-      <a href="{% url 'login' %}">
-        {% bootstrap_button "Login" button_class="btn btn-primary"%}
-      </a>
-      <a href="{% url 'signup' %}">
-        {% bootstrap_button "Signup" button_class="btn btn-primary"%}
-      </a>
-    </div>
-  {% endif %}
-</div>
-{% endblock %}

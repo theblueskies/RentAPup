@@ -7,7 +7,7 @@ from django.views import View
 from django.template import loader
 from django.contrib.auth.forms import UserCreationForm
 
-from pups.models import Puppy
+from pups.models import Puppy, Profile
 from pups.forms import ProfileForm, PuppyForm
 
 
@@ -53,6 +53,11 @@ def user_profile(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = ProfileForm()
+        if request.user:
+            profile = Profile.objects.filter(user_ptr=request.user)
+            if profile.exists() and profile.renter == None:
+                form = ProfileForm()
+                return render(request, 'pups/profile_create.html', {'form': form})
+
 
     return render(request, 'pups/profile_create.html', {'form': form})

@@ -1,10 +1,46 @@
-{% extends 'pups/base.html' %}
+{% load staticfiles %}
+{# Load the tag library #}
+{% load bootstrap3 %}
 
-{% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
-{% endblock %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Basic Page Template</title>
+
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+</head>
+
+<body>
+    <header class="clear">
+        <div class="innerContainer">
+            <h1 class="col"><a href="/">Rent A Pup</a></h1>
+        </div>
+    </header>
+
+
+    <div id="mainWrapper" class="jayZ">
+
+      {% block content %}
+        <h2>Sign up</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% bootstrap_button "SignUp" button_class="btn btn-primary"%}
+        </form>
+      {% endblock %}
+
+
+
+    </div>
+</body>
+
+</html>

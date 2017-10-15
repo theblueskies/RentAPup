@@ -1,4 +1,7 @@
-{% extends 'pups/base.html' %}
+{% load staticfiles %}
+{% extends 'pups/base_logged_in.html' %}
+
+<html>
 {# Load the tag library #}
 {% load bootstrap3 %}
 
@@ -9,19 +12,8 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-
 {% block content %}
-<form action="/dog-trade/" method="post">
-    {% for field in form %}
-      <div class="fieldWrapper">
-          {{ field.errors }}
-          {{ field.label_tag }} {{ field }}
-          {% if field.help_text %}
-          <p class="help">{{ field.help_text|safe }}</p>
-          {% endif %}
-      </div>
-    {% endfor %}
-
-    <input type="submit" value="Submit">
+  <h1> Create Profile</h1>
+  <input type="submit" value="Submit">
 </form>
 {% endblock %}
