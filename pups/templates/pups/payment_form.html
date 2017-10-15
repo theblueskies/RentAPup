@@ -1,3 +1,18 @@
+{% extends 'pups/base_logged_in.html' %}
+{% load staticfiles %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block content %}
+<div class="center">
 <form action="checkout" method="POST">
 	{% csrf_token %}
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -9,3 +24,5 @@
         data-currency="usd">
     </script>
 </form>
+</div>
+{% endblock %}
