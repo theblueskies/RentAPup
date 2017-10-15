@@ -82,10 +82,10 @@ db_options = {
     },
     'prod': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1ncp32l58kbe4',
-        'USER': 'fexzrpiheziffk',
-        'PASSWORD': 'c4ca70092ccff346197293b60cf32f9ee3e8d7cf99a8da3123c6678d10b67096',
-        'HOST': 'ec2-50-17-217-166.compute-1.amazonaws.com',
+        'NAME': 'dfm8bqmsrfs9nq',
+        'USER': 'jcobnfabaajhie',
+        'PASSWORD': 'bda9f20f2f91bc1c8e64f5452585f75e3ad2fd0aad98ea8f9c49662005170ded',
+        'HOST': 'ec2-107-21-109-15.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
