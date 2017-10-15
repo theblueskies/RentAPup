@@ -50,6 +50,7 @@ def user_profile(request):
         # check whether it's valid:
         if form.is_valid():
             print (form.cleaned_data)
+
             user = request.user
             user.first_name = form.cleaned_data['firstname']
             user.last_name = form.cleaned_data['lastname']
@@ -61,12 +62,20 @@ def user_profile(request):
                               address=form.cleaned_data['address'])
             profile.save()
 
-            puppy = Puppy(owner=request.user,
-                          name=form.cleaned_data['name_of_dog'],
-                          breed=form.cleaned_data['breed_of_dog'],
-                          age=form.cleaned_data['age_of_dog'])
-            puppy.save()
-            return redirect('/app/puppy/')
+            try:
+                if form.cleaned_data['renter'] == False:
+                    puppy = Puppy(owner=request.user,
+                                  name=form.cleaned_data['name_of_dog'],
+                                  breed=form.cleaned_data['breed_of_dog'],
+                                  age=form.cleaned_data['age_of_dog'])
+                    puppy.save()
+            except:
+                # DB error will be thrown if puppy fails to save. At that time
+                # we want to clear the profile created too.
+                profile.delete()
+                return redirect('/app/user-profile/')
+            else:
+                return redirect('/app/puppy/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -94,7 +103,7 @@ def get_or_rent_puppy(request):
     if request.method == 'GET':
         context = {}
         profile = Profile.objects.filter(active_user=request.user).first()
-        if profile.renter == True:
+        if profile and profile.renter == True:
             available_puppies = Puppy.objects.filter(rented_now=False).first()
             if available_puppies:
                 context['are_puppies_available'] = True
@@ -106,7 +115,7 @@ def get_or_rent_puppy(request):
 
 def edit_profile(request):
     profile = get_object_or_404(Profile, active_user=request.user)
-    puppy = get_object_or_404(Puppy, owner=request.user)
+    puppy = Puppy.objects.filter(owner=request.user).first()
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = ProfileForm(request.POST)
@@ -123,10 +132,15 @@ def edit_profile(request):
             profile.address = form.cleaned_data['address']
             profile.save()
 
-            puppy.name = form.cleaned_data['name_of_dog'],
-            puppy.breed = form.cleaned_data['breed_of_dog'],
-            puppy.age = form.cleaned_data['age_of_dog']
-            puppy.save()
+            if form.cleaned_data['renter'] == False:
+                puppy = Puppy.objects.filter(owner=request.user).first()
+                if puppy:
+                    puppy.delete()
+            else:
+                puppy.name = form.cleaned_data['name_of_dog'],
+                puppy.breed = form.cleaned_data['breed_of_dog'],
+                puppy.age = form.cleaned_data['age_of_dog']
+                puppy.save()
             return redirect('/app/puppy/')
     else:
         data = {
@@ -135,9 +149,14 @@ def edit_profile(request):
             'email': request.user.email,
             'address': profile.address,
             'renter': profile.renter,
-            'name_of_dog': puppy.name,
-            'breed_of_dog': puppy.breed,
-            'age_of_dog': puppy.age,
+            'name_of_dog': '',
+            'breed_of_dog': '',
+            'age_of_dog': 0,
         }
+        if puppy:
+            data['name_of_dog'] = puppy.name,
+            data['breed_of_dog'] = puppy.breed,
+            data['age_of_dog'] = puppy.age
+
         form = ProfileForm(data)
         return render(request, 'pups/profile_edit.html', {'form': form})
