@@ -4,7 +4,7 @@
 {% if puppies %}
     <ul>
     {% for puppy in puppies %}
-        <li><a href="/app/{{ puppy.id }}/">{{ puppy.name }}</a></li>
+        <li>{{ puppy }}</li>
     {% endfor %}
     </ul>
 {% else %}

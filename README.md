@@ -10,4 +10,4 @@ Steps to start it up.
 5. pip install -r requirements.txt
 
 To Run:
-1. python manage.py runserver
+1. make dev
