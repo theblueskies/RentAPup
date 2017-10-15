@@ -7,7 +7,8 @@ from django.views import View
 from django.template import loader
 from django.contrib.auth.forms import UserCreationForm
 
-from pups.models import Puppy, Profile
+from pups.models import Puppy
+from pups.models import UserProfile as Profile
 from pups.forms import ProfileForm, PuppyForm
 
 

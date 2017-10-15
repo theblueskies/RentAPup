@@ -4,34 +4,33 @@ from django.contrib.auth.models import User
 import pups.stripe_settings
 
 class Puppy(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='puppy')
     name = models.CharField(max_length=20)
     breed = models.CharField(max_length=20)
     age = models.IntegerField()
 
 
-class Profile(User):
-    renter = models.BooleanField(default=True)
-    puppy = models.ForeignKey(Puppy,
-                              on_delete=models.CASCADE,
-                              related_name='puppy')
- 
+class UserProfile(models.Model):
+    active_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    renter = models.BooleanField()
+
 
 class Sale(models.Model):
     def __init__(self, *args, **kwargs):
         super(Sale, self).__init__(*args, **kwargs)
- 
+
         # bring in stripe, and get the api key from settings.py
         import stripe
         stripe.api_key = stripe_settings.STRIPE_API_KEY
- 
+
         self.stripe = stripe
- 
+
     # store the stripe charge id for this sale
     charge_id = models.CharField(max_length=32)
- 
+
     # you could also store other information about the sale
     # but I'll leave that to you!
- 
+
     def charge(self, price_in_cents, number, exp_month, exp_year, cvc):
         """
         Takes a the price and credit card details: number, exp_month,
