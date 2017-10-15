@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from pups import views
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'pups/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'pups/logged_out.html'}, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 ]
