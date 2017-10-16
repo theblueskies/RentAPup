@@ -20,7 +20,7 @@ from django.contrib.auth import views as auth_views
 from django.views.static import serve
 
 from pups import views
-
+admin.site.site_header = 'Puppy Playdates Administration'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('pups.urls')),
