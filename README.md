@@ -1,5 +1,5 @@
 # RentAPup
-Startup Weekend - RentAPup.co
+Startup Weekend - www.rentapup.co OR www.puppyplaydates.co
 
 Steps to start it up.
 
